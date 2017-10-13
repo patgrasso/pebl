@@ -284,7 +284,7 @@ class Network(object):
         except:
             raise Exception("Cannot find the dot program at %s." % dotpath)
 
-        dotgraph = pydot.graph_from_dot_file(dot2)
+        dotgraph = pydot.graph_from_dot_file(dot2)[0]
         nodes = (n for n in dotgraph.get_node_list() if n.get_pos())
         self.node_positions = [[int(float(i)) for i in n.get_pos()[1:-1].split(',')] for n in nodes] 
 
@@ -335,7 +335,7 @@ class Network(object):
     def as_pydot(self):
         """Returns a pydot instance for the network."""
 
-        return pydot.graph_from_dot_data(self.as_dotstring())
+        return pydot.graph_from_dot_data(self.as_dotstring())[0]
 
 
     def as_image(self, filename, decorator=lambda x: x, prog='dot'):
